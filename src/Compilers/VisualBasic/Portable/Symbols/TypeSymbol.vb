@@ -261,6 +261,12 @@ Namespace Microsoft.CodeAnalysis.VisualBasic.Symbols
             End Get
         End Property
 
+        Friend Overridable ReadOnly Property IsRefLikeType As Boolean
+            Get
+                Return False
+            End Get
+        End Property
+
         ' Only the compiler can create TypeSymbols.
         Friend Sub New()
         End Sub

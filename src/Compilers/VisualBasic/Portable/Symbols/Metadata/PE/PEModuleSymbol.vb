@@ -144,6 +144,17 @@ Namespace Microsoft.CodeAnalysis.VisualBasic.Symbols.Metadata.PE
             Return _lazyCustomAttributes
         End Function
 
+        Friend Function HasAnyCustomAttributes(token As EntityHandle) As Boolean
+            Try
+                For Each attr In _module.GetCustomAttributesOrThrow(token)
+                    Return True
+                Next attr
+            Catch e1 As BadImageFormatException
+            End Try
+
+            Return False
+        End Function
+
         Friend Function GetAssemblyAttributes() As ImmutableArray(Of VisualBasicAttributeData)
             If _lazyAssemblyAttributes.IsDefault Then
                 Dim moduleAssemblyAttributesBuilder As ArrayBuilder(Of VisualBasicAttributeData) = Nothing
